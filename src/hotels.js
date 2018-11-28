@@ -19,6 +19,7 @@ import {
   Filter,
 } from 'react-admin';
 import StarField from './starfield';
+import ActionField from './actionfield';
 
 const HotelFilter = (props) => (
   <Filter {...props}>
@@ -49,6 +50,7 @@ export const HotelList = props => (
       <NumberField source="lon" />
       <NumberField source="numberOfBeds" />
       <StarField source="rating" />
+      <ActionField source="id" label="Actions"/>
     </Datagrid>
   </List>
 );
