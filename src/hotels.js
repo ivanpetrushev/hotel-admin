@@ -7,6 +7,7 @@ import {
   ReferenceField,
   NumberField,
   Edit,
+  Create,
   SimpleForm,
   TextInput,
   LongTextInput,
@@ -15,10 +16,23 @@ import {
   DisabledInput,
   ReferenceInput,
   SelectInput,
+  Filter,
 } from 'react-admin';
+import StarField from './starfield';
+
+const HotelFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label="Search" source="title_contains" alwaysOn />
+    <ReferenceInput label="City" source="city.id" reference="City" allowEmpty>
+      <SelectInput optionText="name" />
+    </ReferenceInput>
+    <NumberInput label="Number of beds >" source="numberOfBeds_gt" allowEmpty />
+    <NumberInput label="Number of beds <" source="numberOfBeds_lt" allowEmpty />
+  </Filter>
+);
 
 export const HotelList = props => (
-  <List {...props}>
+  <List {...props} filters={<HotelFilter/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="title" />
@@ -34,7 +48,7 @@ export const HotelList = props => (
       <NumberField source="lat" />
       <NumberField source="lon" />
       <NumberField source="numberOfBeds" />
-      <NumberField source="rating" />
+      <StarField source="rating" />
     </Datagrid>
   </List>
 );
@@ -45,8 +59,6 @@ export const HotelEdit = props => (
       <DisabledInput source="id" />
       <TextInput source="title" />
       <LongTextInput source="address" />
-      {/*<TextInput source="city.id" />*/}
-      {/*<TextInput source="city" />*/}
       <ReferenceInput label="City" source="city.id" reference="City">
         <SelectInput optionText="name" />
       </ReferenceInput>

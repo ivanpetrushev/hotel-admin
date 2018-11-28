@@ -6,6 +6,7 @@ import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from "apollo-cache-inmemory";
 import {CityList, CityEdit, CityCreate} from './cities';
 import {HotelList, HotelEdit} from "./hotels";
+import Dashboard from './dashboard';
 
 const link = new HttpLink({
   uri: "https://api.graph.cool/simple/v1/cjo9qjp1p32hh01281qa1kwea"
@@ -34,7 +35,7 @@ class App extends Component {
     }
 
     return (
-      <Admin dataProvider={dataProvider}>
+      <Admin dataProvider={dataProvider} dashboard={Dashboard}>
         <Resource name="City" list={CityList} edit={CityEdit} create={CityCreate} />
         <Resource name="Hotel" list={HotelList} edit={HotelEdit}/>
       </Admin>
